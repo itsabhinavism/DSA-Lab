@@ -4,15 +4,15 @@ void compareNumbers(int *num1, int *num2)
 {
     if (*num1 < *num2)
     {
-        cout << *num1 << " is smaller than " << *num2 << std::endl;
+        cout << *num1 << " is smaller than " << *num2 << endl;
     }
     else if (*num1 > *num2)
     {
-        cout << *num2 << " is smaller than " << *num1 << std::endl;
+        cout << *num2 << " is smaller than " << *num1 << endl;
     }
     else
     {
-        cout << "Both numbers are equal." << std::endl;
+        cout << "Both numbers are equal." << endl;
     }
 }
 

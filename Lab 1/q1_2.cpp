@@ -38,14 +38,14 @@ int main()
 
     int *arr = new int[size];
 
-    std::cout << "Enter array elements: ";
+    cout << "Enter array elements: ";
     for (int i = 0; i < size; ++i)
     {
-        std::cin >> arr[i];
+        cin >> arr[i];
     }
 
     int primeSum = sumOfPrimeElements(arr, size);
-    std::cout << "Sum = " << primeSum << std::endl;
+    cout << "Sum = " << primeSum << endl;
 
     delete[] arr;
 
