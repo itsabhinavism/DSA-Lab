@@ -95,10 +95,12 @@ int main()
             deleteElement(arr, n, position);
             break;
         case 3:
+       // {
             int target;
             cout << "Enter element to search: ";
             cin >> target;
-            int index = linearSearch(arr, n, target);
+            int index; 
+            index = linearSearch(arr, n, target);
             if (index != -1)
             {
                 cout << "Element found at index " << index << endl;
@@ -108,11 +110,12 @@ int main()
                 cout << "Element not found." << endl;
             }
             break;
+        //}
         case 4:
             traverseArray(arr, n);
             break;
         case 5:
-            cout << "Exiting program." << endl;
+            cout << "Exiting program." <<  endl;
             return 0;
         default:
             cout << "Invalid choice. Please enter a valid option." << endl;
