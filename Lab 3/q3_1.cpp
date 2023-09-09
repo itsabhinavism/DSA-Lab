@@ -16,7 +16,7 @@ int main()
             cin >> arr[i][j];
         }
     }
-    cout << "The matrix you entered : ";
+    cout << "\nThe matrix you entered : ";
     for (int i = 0; i < r; i++)
     {
         for (int j = 0; j < c; j++)
