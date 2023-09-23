@@ -1,143 +1,246 @@
-#include <stdio.h>
-#include <stdlib.h>
+#include <iostream>
+using namespace std;
 
-// Define the structure for a Node
-struct Node
+class Node
 {
+public:
     int data;
-    struct Node *next;
+    Node *next;
+
+    Node(int val)
+    {
+        data = val;
+        next = nullptr;
+    }
 };
 
-// Function to insert a new node at the end of the list
-void insert(struct Node **head, int val)
+class Stack
 {
-    struct Node *newNode = (struct Node *)malloc(sizeof(struct Node));
-    newNode->data = val;
-    newNode->next = NULL;
+private:
+    Node *top;
 
-    if (*head == NULL)
+public:
+    Stack()
     {
-        *head = newNode;
-        return;
+        top = nullptr;
     }
 
-    struct Node *temp = *head;
-    while (temp->next != NULL)
+    void push(int val)
     {
-        temp = temp->next;
+        Node *newNode = new Node(val);
+        newNode->next = top;
+        top = newNode;
     }
-    temp->next = newNode;
-}
 
-// Function to search for an element in the list
-int search(struct Node *head, int val)
-{
-    struct Node *temp = head;
-    while (temp != NULL)
+    void pop()
     {
-        if (temp->data == val)
+        if (isEmpty())
         {
-            return 1; // Element found
+            cout << "Stack is empty, cannot pop element.\n";
         }
-        temp = temp->next;
-    }
-    return 0; // Element not found
-}
-
-// Function to sort the list in ascending order
-void sort(struct Node **head)
-{
-    if (*head == NULL || (*head)->next == NULL)
-    {
-        return;
-    }
-
-    struct Node *current = *head;
-    struct Node *min;
-
-    while (current != NULL)
-    {
-        min = current;
-
-        struct Node *temp = current->next;
-        while (temp != NULL)
+        else
         {
-            if (temp->data < min->data)
+            Node *temp = top;
+            top = top->next;
+            delete temp;
+        }
+    }
+
+    bool isEmpty()
+    {
+        return top == nullptr;
+    }
+
+    void display()
+    {
+        if (isEmpty())
+        {
+            cout << "Stack is empty.\n";
+        }
+        else
+        {
+            cout << "Stack elements: ";
+            Node *temp = top;
+            while (temp != nullptr)
             {
-                min = temp;
+                cout << temp->data << " ";
+                temp = temp->next;
             }
-            temp = temp->next;
+            cout << endl;
         }
-
-        int tempData = current->data;
-        current->data = min->data;
-        min->data = tempData;
-
-        current = current->next;
     }
-}
-
-// Function to reverse the list
-void reverse(struct Node **head)
-{
-    struct Node *prev = NULL;
-    struct Node *current = *head;
-    struct Node *next = NULL;
-
-    while (current != NULL)
-    {
-        next = current->next;
-        current->next = prev;
-        prev = current;
-        current = next;
-    }
-
-    *head = prev;
-}
-
-// Function to print the list
-void print(struct Node *head)
-{
-    struct Node *temp = head;
-    while (temp != NULL)
-    {
-        printf("%d ", temp->data);
-        temp = temp->next;
-    }
-    printf("\n");
-}
+};
 
 int main()
 {
-    struct Node *head = NULL;
+    Stack stack;
+    char choice;
 
-    // Insert elements
-    insert(&head, 3);
-    insert(&head, 1);
-    insert(&head, 5);
-    insert(&head, 2);
-    insert(&head, 4);
-
-    printf("Original List: ");
-    print(head);
-
-    int searchElement = 5;
-    if (search(head, searchElement))
+    do
     {
-        printf("%d found in the list.\n", searchElement);
-    }
-    else
+        cout << "\nMenu:\n";
+        cout << "a. Push\n";
+        cout << "b. Pop\n";
+        cout << "c. IsEmpty\n";
+        cout << "d. Display stack elements\n";
+        cout << "e. Quit\n";
+        cout << "Enter your choice: ";
+        cin >> choice;
+
+        switch (choice)
+        {
+        case 'a':
+            int val;
+            cout << "Enter value to push: ";
+            cin >> val;
+            stack.push(val);
+            break;
+        case 'b':
+            stack.pop();
+            break;
+        case 'c':
+            if (stack.isEmpty())
+            {
+                cout << "Stack is empty.\n";
+            }
+            else
+            {
+                cout << "Stack is not empty.\n";
+            }
+            break;
+        case 'd':
+            stack.display();
+            break;
+        case 'e':
+            cout << "Quitting program.\n";
+            break;
+        default:
+            cout << "Invalid choice. Please try again.\n";
+        }
+    } while (choice != 'e');
+
+    return 0;
+}
+#include <iostream>
+using namespace std;
+
+class Node
+{
+public:
+    int data;
+    Node *next;
+
+    Node(int val)
     {
-        printf("%d not found in the list.\n", searchElement);
+        data = val;
+        next = nullptr;
+    }
+};
+
+class Stack
+{
+private:
+    Node *top;
+
+public:
+    Stack()
+    {
+        top = nullptr;
     }
 
-    sort(&head);
-    printf("Sorted List: ");
-    print(head);
+    void push(int val)
+    {
+        Node *newNode = new Node(val);
+        newNode->next = top;
+        top = newNode;
+    }
 
-    reverse(&head);
-    printf("Reversed List: ");
-    print(head);
+    void pop()
+    {
+        if (isEmpty())
+        {
+            cout << "Stack is empty, cannot pop element.\n";
+        }
+        else
+        {
+            Node *temp = top;
+            top = top->next;
+            delete temp;
+        }
+    }
+
+    bool isEmpty()
+    {
+        return top == nullptr;
+    }
+
+    void display()
+    {
+        if (isEmpty())
+        {
+            cout << "Stack is empty.\n";
+        }
+        else
+        {
+            cout << "Stack elements: ";
+            Node *temp = top;
+            while (temp != nullptr)
+            {
+                cout << temp->data << " ";
+                temp = temp->next;
+            }
+            cout << endl;
+        }
+    }
+};
+
+int main()
+{
+    Stack stack;
+    char choice;
+
+    do
+    {
+        cout << "\nMenu:\n";
+        cout << "a. Push\n";
+        cout << "b. Pop\n";
+        cout << "c. IsEmpty\n";
+        cout << "d. Display stack elements\n";
+        cout << "e. Quit\n";
+        cout << "Enter your choice: ";
+        cin >> choice;
+
+        switch (choice)
+        {
+        case 'a':
+            int val;
+            cout << "Enter value to push: ";
+            cin >> val;
+            stack.push(val);
+            break;
+        case 'b':
+            stack.pop();
+            break;
+        case 'c':
+            if (stack.isEmpty())
+            {
+                cout << "Stack is empty.\n";
+            }
+            else
+            {
+                cout << "Stack is not empty.\n";
+            }
+            break;
+        case 'd':
+            stack.display();
+            break;
+        case 'e':
+            cout << "Quitting program.\n";
+            break;
+        default:
+            cout << "Invalid choice. Please try again.\n";
+        }
+    } while (choice != 'e');
 
     return 0;
 }
