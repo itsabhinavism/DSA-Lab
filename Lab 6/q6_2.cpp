@@ -1,121 +1,110 @@
-#include <iostream>
+#include<iostream>
 using namespace std;
 
-class Node
-{
-public:
+// Node structure for the linked list
+struct Node {
     int data;
-    Node *next;
-
-    Node(int val)
-    {
-        data = val;
-        next = nullptr;
-    }
+    Node* next;
 };
 
-class Stack
-{
+// Stack class
+class Stack {
 private:
-    Node *top;
+    Node* top;
 
 public:
-    Stack()
-    {
+    Stack() {
         top = nullptr;
     }
 
-    void push(int val)
-    {
-        Node *newNode = new Node(val);
+    // Function to push an element onto the stack
+    void push(int value) {
+        Node* newNode = new Node;
+        newNode->data = value;
         newNode->next = top;
         top = newNode;
+        cout << "Element " << value << " pushed onto the stack.\n";
     }
 
-    void pop()
-    {
-        if (isEmpty())
-        {
-            cout << "Stack is empty, cannot pop element.\n";
+    // Function to pop an element from the stack
+    void pop() {
+        if (isEmpty()) {
+            cout << "Stack is empty. Cannot pop.\n";
+            return;
         }
-        else
-        {
-            Node *temp = top;
-            top = top->next;
-            delete temp;
-        }
+        Node* temp = top;
+        top = top->next;
+        int poppedValue = temp->data;
+        delete temp;
+        cout << "Element " << poppedValue << " popped from the stack.\n";
     }
 
-    bool isEmpty()
-    {
+    // Function to check if the stack is empty
+    bool isEmpty() {
         return top == nullptr;
     }
 
-    void display()
-    {
-        if (isEmpty())
-        {
+    // Function to display the stack elements
+    void display() {
+        if (isEmpty()) {
             cout << "Stack is empty.\n";
+            return;
         }
-        else
-        {
-            cout << "Stack elements: ";
-            Node *temp = top;
-            while (temp != nullptr)
-            {
-                cout << temp->data << " ";
-                temp = temp->next;
-            }
-            cout << endl;
+        Node* temp = top;
+        cout << "Stack elements: ";
+        while (temp != nullptr) {
+            cout << temp->data << " ";
+            temp = temp->next;
         }
+        cout << endl;
     }
 };
 
-int main()
-{
+int main() {
     Stack stack;
     char choice;
 
-    do
-    {
+    do {
         cout << "\nMenu:\n";
         cout << "a. Push\n";
         cout << "b. Pop\n";
         cout << "c. IsEmpty\n";
-        cout << "d. Display stack elements\n";
-        cout << "e. Quit\n";
+        cout << "d. Display\n";
+        cout << "e. Exit\n";
         cout << "Enter your choice: ";
         cin >> choice;
 
-        switch (choice)
-        {
-        case 'a':
-            int val;
-            cout << "Enter value to push: ";
-            cin >> val;
-            stack.push(val);
-            break;
-        case 'b':
-            stack.pop();
-            break;
-        case 'c':
-            if (stack.isEmpty())
-            {
-                cout << "Stack is empty.\n";
+        switch (choice) {
+            case 'a': {
+                int value;
+                cout << "Enter value to push: ";
+                cin >> value;
+                stack.push(value);
+                break;
             }
-            else
-            {
-                cout << "Stack is not empty.\n";
+            case 'b': {
+                stack.pop();
+                break;
             }
-            break;
-        case 'd':
-            stack.display();
-            break;
-        case 'e':
-            cout << "Quitting program.\n";
-            break;
-        default:
-            cout << "Invalid choice. Please try again.\n";
+            case 'c': {
+                if (stack.isEmpty()) {
+                    cout << "Stack is empty.\n";
+                } else {
+                    cout << "Stack is not empty.\n";
+                }
+                break;
+            }
+            case 'd': {
+                stack.display();
+                break;
+            }
+            case 'e': {
+                cout << "Exiting program. Goodbye!\n";
+                break;
+            }
+            default: {
+                cout << "Invalid choice. Please try again.\n";
+            }
         }
     } while (choice != 'e');
 
